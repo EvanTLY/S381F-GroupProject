@@ -1,6 +1,6 @@
 const {MongoClient} = require('mongodb');
 const {objectId} = require('mongodb');
-const mongoURL = 'mongo "mongodb+srv://cluster0.i3gdyic.mongodb.net/" --username evantse';
+const mongoURL = 'mongodb+srv://evantse:takyievan5@cluster0.i3gdyic.mongodb.net/?retryWrites=true&w=majority';
 const dbname = 'Clustor0';
 const collectionName = 'note';
 const express = require('express');
