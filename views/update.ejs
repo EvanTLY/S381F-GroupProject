@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update Note</title>
+</head>
+<body>
+  <h1>Update Note</h1>
+  <form method="POST" action="/notes/update">
+    <label for="noteId">Select a note to update:</label>
+    <select id="noteId" name="noteId">
+      <% notes.forEach((note) => { %>
+        <option value="<%= note._id %>"><%= note.title %></option>
+      <% }) %>
+    </select>
+    <br>
+    <label for="title">New Title:</label>
+    <input type="text" id="title" name="title">
+    <br>
+    <label for="content">New Content:</label>
+    <textarea id="content" name="content"></textarea>
+    <br>
+    <button type="submit">Update Note</button>
+  </form>
+  <a href="/notes">Cancel</a>
+</body>
+</html>
