@@ -69,10 +69,19 @@ app.get('/logout', (req, res) => {
 app.get('/notes', (req, res) => {
     // Check if the user is logged in
     if (!req.session.userid) {
-      res.redirect('/login');
-    } else {
-      res.render('notes');
+      return res.redirect('/login');
     }
+
+    db.collection(collectionName)
+    .find()
+    .toArray()
+    .then((notes) => {
+      res.render('notes', { notes: notes, userid: req.session.userid });
+    })
+    .catch((error) => {
+      console.error('Error retrieving notes: ', error);
+      res.json({ error: 'Error occurred' });
+    });
   });
 
 //Note API
@@ -137,4 +146,6 @@ app.delete('/api/notes/:id', (req, res) => {
 
 
 //Start the server
-app.listen(process.env.PORT || 8099);
+app.listen(process.env.PORT || 8099, () => {
+    console.log('Server is running...');
+});
