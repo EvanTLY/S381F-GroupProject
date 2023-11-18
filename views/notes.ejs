@@ -60,21 +60,9 @@
     });
   </script>
 
-  <% if (notes.length > 0) { %>
-  <ul>
-    <% notes.forEach((note) => { %>
-      <li>
-        <h2><%= note.title %></h2>
-        <p><%= note.content %></p>
-      </li>
-    <% }) %>
-  </ul>
   <form method="GET" action="/notes/delete">
     <button type="submit">Delete Notes</button>
   </form>
-  <% } else { %>
-  <p>No notes found.</p>
-  <% } %>
 
   <form action="/logout" method="GET">
     <button type="submit">Logout</button>
