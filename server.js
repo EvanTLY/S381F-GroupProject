@@ -172,6 +172,39 @@ app.post('/notes/delete', (req, res) => {
     });
 });
 
+// Render the update.ejs view with the notes data
+app.get('/notes/update', (req, res) => {
+    db.collection(collectionName)
+      .find({})
+      .toArray()
+      .then((notes) => {
+        res.render('update', { notes });
+      })
+      .catch((error) => {
+        console.error('Error fetching notes: ', error);
+        res.redirect('/notes');
+      });
+  });
+  
+  // Handle the updating of a note
+  app.post('/notes/update', (req, res) => {
+    const noteId = req.body.noteId;
+    const { title, content } = req.body;
+  
+    db.collection(collectionName)
+      .updateOne(
+        { _id: ObjectId(noteId) },
+        { $set: { title, content } }
+      )
+      .then(() => {
+        res.redirect('/notes');
+      })
+      .catch((error) => {
+        console.error('Error updating note: ', error);
+        res.redirect('/notes');
+      });
+  });
+
 //Start the server
 app.listen(process.env.PORT || 8099, () => {
     console.log('Server is running...');
