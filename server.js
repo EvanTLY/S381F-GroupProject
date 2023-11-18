@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/login.ejs');
+    res.render('login');
 });
 
 //Login
@@ -71,7 +71,7 @@ app.get('/notes', (req, res) => {
     if (!req.session.userid) {
       res.redirect('/login');
     } else {
-      res.sendFile(__dirname + '/notes.html');
+      res.render('notes');
     }
   });
 
