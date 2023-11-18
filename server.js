@@ -143,29 +143,34 @@ app.delete('/api/notes/:id', (req, res) => {
     });
 });
 
-// Add a new route for deleting notes
-app.post('/notes/delete', (req, res) => {
-    const { noteIds } = req.body;
-  
-    if (!Array.isArray(noteIds)) {
-      // If only one note is selected, convert it to an array
-      noteIds = [noteIds];
-    }
-  
-    const objectIdArray = noteIds.map((id) => ObjectId(id));
-  
-    db.collection(collectionName)
-      .deleteMany({ _id: { $in: objectIdArray } })
-      .then(() => {
-        res.redirect('/notes');
-      })
-      .catch((error) => {
-        console.error('Error deleting notes: ', error);
-        res.redirect('/notes');
-      });
+// Render the delete.ejs view with the notes data
+app.get('/notes/delete', (req, res) => {
+  db.collection(collectionName)
+    .find({})
+    .toArray()
+    .then((notes) => {
+      res.render('delete', { notes });
+    })
+    .catch((error) => {
+      console.error('Error fetching notes: ', error);
+      res.redirect('/notes');
+    });
 });
 
+// Handle the deletion of a note
+app.post('/notes/delete', (req, res) => {
+  const noteId = req.body.noteId;
 
+  db.collection(collectionName)
+    .deleteOne({ _id: ObjectId(noteId) })
+    .then(() => {
+      res.redirect('/notes');
+    })
+    .catch((error) => {
+      console.error('Error deleting note: ', error);
+      res.redirect('/notes');
+    });
+});
 
 //Start the server
 app.listen(process.env.PORT || 8099, () => {
