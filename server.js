@@ -144,7 +144,7 @@ app.delete('/api/notes/:id', (req, res) => {
 });
 
 // Add a new route for deleting notes
-app.post('/delete-notes', (req, res) => {
+app.post('/notes/delete', (req, res) => {
     const { noteIds } = req.body;
   
     if (!Array.isArray(noteIds)) {
@@ -163,7 +163,7 @@ app.post('/delete-notes', (req, res) => {
         console.error('Error deleting notes: ', error);
         res.redirect('/notes');
       });
-  });
+});
 
 
 
