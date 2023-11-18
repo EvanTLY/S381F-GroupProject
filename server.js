@@ -143,6 +143,28 @@ app.delete('/api/notes/:id', (req, res) => {
     });
 });
 
+// Add a new route for deleting notes
+app.post('/delete-notes', (req, res) => {
+    const { noteIds } = req.body;
+  
+    if (!Array.isArray(noteIds)) {
+      // If only one note is selected, convert it to an array
+      noteIds = [noteIds];
+    }
+  
+    const objectIdArray = noteIds.map((id) => ObjectId(id));
+  
+    db.collection(collectionName)
+      .deleteMany({ _id: { $in: objectIdArray } })
+      .then(() => {
+        res.redirect('/notes');
+      })
+      .catch((error) => {
+        console.error('Error deleting notes: ', error);
+        res.redirect('/notes');
+      });
+  });
+
 
 
 //Start the server
