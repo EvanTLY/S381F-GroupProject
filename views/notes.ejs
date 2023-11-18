@@ -69,7 +69,9 @@
       </li>
     <% }) %>
   </ul>
-  <a href="/notes/delete" class="delete-button">Delete Notes</a>
+  <form method="GET" action="/notes/delete">
+    <button type="submit">Delete Notes</button>
+  </form>
   <% } else { %>
   <p>No notes found.</p>
   <% } %>
