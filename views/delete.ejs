@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Delete Note</title>
+</head>
+<body>
+  <h1>Delete Note</h1>
+  <p>Select the notes you want to delete:</p>
+  <form method="POST" action="/delete-notes">
+    <% notes.forEach((note) => { %>
+      <label>
+        <input type="checkbox" name="noteIds" value="<%= note._id %>">
+        <%= note.title %>
+      </label>
+      <br>
+    <% }) %>
+    <input type="submit" value="Delete">
+  </form>
+  <a href="/notes">Cancel</a>
+</body>
+</html>
