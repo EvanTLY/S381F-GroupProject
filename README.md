@@ -5,8 +5,8 @@ This is a server-side app that allow users to manage (create, update, delete, re
 To login:
 1. Open 'https://s381f-project-notesmaker.onrender.com/login'
 2. Enter following data:
-    - User Name: (see uesr in server.json)
-    - Password: (see user in server.json)
+    - User Name: user1
+    - Password: pw1
 3. Click "Login" button
 4. Your browser will turn to notes page ('https://s381f-project-notesmaker.onrender.com/notes').
 
