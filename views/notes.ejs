@@ -18,7 +18,6 @@
   <ul id="notesList"></ul>
 
   <script>
-    // Fetch existing notes and display them on the page
     fetch('/api/notes')
       .then((response) => response.json())
       .then((notes) => {
@@ -33,7 +32,6 @@
         console.error('Error retrieving notes:', error);
       });
 
-    // Handle form submission to create a new note
     document.getElementById('createNoteForm').addEventListener('submit', (event) => {
       event.preventDefault();
 
@@ -68,7 +66,7 @@
     <button type="submit">Update Notes</button>
   </form>
 
-  <form action="/login" method="GET">
+  <form method="GET" action="/login">
     <button type="submit">Logout</button>
   </form>
 </body>
