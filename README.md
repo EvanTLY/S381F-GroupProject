@@ -12,6 +12,7 @@ To login:
 
 To logout:
 1. Click "Logout" button on the notes page.
+2. Then it will back to login page.
 
 ### CRUD Services
 To test CRUD services
