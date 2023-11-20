@@ -151,7 +151,7 @@ app.get('/notes/update', (req, res) => {
         { $set: { title, content } }
       )
       .then(() => {
-        res.redirect('/notes');
+        res.render('notes');
       })
       .catch((error) => {
         console.error('Error updating note: ', error);
