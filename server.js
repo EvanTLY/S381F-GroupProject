@@ -51,15 +51,17 @@ app.post('/login', (req, res) => {
             req.session.userid = user[i].name;
             console.log(req.session.userid);
             return res.redirect("/notes");
+        } else {
+          console.log("Invalid Input");
+          res.redirect('/login');
         }
     }
-    console.log("Invalid Input");
-    res.render('/login');
+    
 });
 
 app.get('/logout', (req, res) => {
     req.session.destroy();
-    res.render('/login');
+    res.render('login');
 });
 
 app.get('/notes', (req, res) => {
