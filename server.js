@@ -105,43 +105,7 @@ app.get('/api/notes', (req, res) => {
     });
 });
 
-app.get('/api/notes/:id', (req, res) => {
-    const {id} = req.params;
 
-    db.collection(collectionName).findOne({_id: ObjectId(id)}).then((note) => {
-        if (note) {
-            res.json(note);
-        } else {
-            res.json({error: 'Note not found'});
-        }
-    }).catch((error) => {
-        console.error('Error retrieving note: ', error);
-        res.json({error: 'Error occurred'});
-    });
-});
-
-app.put('/api/notes/:id', (req,res) => {
-    const {id} = req.params;
-    const {title, content} = req.body;
-
-    db.collection(collectionName).updateOne({_id: ObjectId(id)}, {$set: {title, content}}).then(() => {
-        res.json({message: 'Note updated'});
-    }).catch((error) => {
-        console.error('Error updating not: ', error);
-        res.json({error: 'Error occurred'});
-    });
-});
-
-app.delete('/api/notes/:id', (req, res) => {
-    const {id} = req.params;
-
-    db.collection(collectionName).deleteOne({_id: ObjectId(id)}).then(() => {
-        res.json({message: 'Note deleted'});
-    }).catch((error) => {
-        console.error('Error deleting note: ', error);
-        res.json({error: 'Error occurred'});
-    });
-});
 
 // Render the delete.ejs view with the notes data
 app.get('/notes/delete', (req, res) => {
