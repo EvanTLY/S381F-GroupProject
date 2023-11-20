@@ -9,7 +9,7 @@
   <form method="POST" action="/notes/delete">
     <% notes.forEach((note) => { %>
       <label>
-        <input type="checkbox" name="noteIds" value="<%= note._id %>">
+        <input type="checkbox" name="noteId" value="<%= note._id %>">
         <%= note.title %>
       </label>
       <br>
