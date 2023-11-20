@@ -11,9 +11,7 @@ const { ObjectId } = require('mongodb');
 const SECRETKEY = 'S381F';
 
 var user = new Array (
-    {name: "user1", password: "pw1"},
-    {name: "user2", passowrd: "pw2"},
-    {name: "user3", password: "pw3"}
+    {name: "user1", password: "pw1"}
 );
 
 app.set('view engine', 'ejs');
@@ -46,7 +44,6 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-//Login
 app.post('/login', (req, res) => {
     for (var i = 0; i < user.length; i++) {
         if (user[i].name == req.body.username && user[i].password == req.body.password) {
@@ -57,17 +54,15 @@ app.post('/login', (req, res) => {
         }
     }
     console.log("Invalid Input");
-    res.redirect('/login');
+    res.render('/login');
 });
 
-// Logout
 app.get('/logout', (req, res) => {
     req.session.destroy();
-    res.redirect('/login');
+    res.render('/login');
 });
 
 app.get('/notes', (req, res) => {
-    // Check if the user is logged in
     if (!req.session.userid) {
       return res.redirect('/login');
     }
@@ -84,7 +79,6 @@ app.get('/notes', (req, res) => {
     });
   });
 
-//Note API
 app.post('/api/notes', (req, res) => {
     const {title, content} = req.body;
 
@@ -105,9 +99,6 @@ app.get('/api/notes', (req, res) => {
     });
 });
 
-
-
-// Render the delete.ejs view with the notes data
 app.get('/notes/delete', (req, res) => {
   db.collection(collectionName)
     .find({})
@@ -121,7 +112,6 @@ app.get('/notes/delete', (req, res) => {
     });
 });
 
-// Handle the deletion of a note
 app.post('/notes/delete', (req, res) => {
   const noteId = req.body.noteId;
 
@@ -136,7 +126,6 @@ app.post('/notes/delete', (req, res) => {
     });
 });
 
-// Render the update.ejs view with the notes data
 app.get('/notes/update', (req, res) => {
     db.collection(collectionName)
       .find({})
@@ -150,7 +139,6 @@ app.get('/notes/update', (req, res) => {
       });
   });
   
-  // Handle the updating of a note
   app.post('/notes/update', (req, res) => {
     const noteId = req.body.noteId;
     const { title, content } = req.body;
@@ -169,7 +157,6 @@ app.get('/notes/update', (req, res) => {
       });
   });
 
-//Start the server
 app.listen(process.env.PORT || 8099, () => {
     console.log('Server is running...');
 });
