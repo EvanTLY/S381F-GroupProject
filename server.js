@@ -26,7 +26,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 var documents = {};
 let db; 
 
-//Connect to MongoDB
 MongoClient.connect(mongoURL, { useUnifiedTopology: true })
   .then((client) => {
     db = client.db(dbName);
