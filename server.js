@@ -120,7 +120,7 @@ app.post('/notes/delete', (req, res) => {
   db.collection(collectionName)
     .deleteOne({ _id: ObjectId(noteId) })
     .then(() => {
-      res.redirect('/notes');
+      res.render('notes');
     })
     .catch((error) => {
       console.error('Error deleting note: ', error);
